@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Your shopping cart
+{% endblock %}
+
+{% block extrahead %}
+<style>
+    table {
+      font-family: arial, sans-serif; 
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th {
+        background-color: rgba(7, 158, 245, 0.938);
+    }
+    td, th {
+      text-align: center;
+      padding: 15px;
+    }
+</style>
+{%endblock extrahead %}
+
+
+{% block content %}
+<h1>Your shopping cart</h1>
+{% if cart.products.exists %}
+     <table class="cart" border="10">
+        <thead>
+            <tr>
+                <th>#</th>
+            <!--    <th>Image</th> -->
+                <th>Product</th>
+            <!--  <th>Quantity</th>  -->
+                <th>Remove</th>
+            <!--  <th>Unit price</th>  -->                  
+                <th>Price</th>
+            </tr>
+        </thead>
+       <tbody>
+        {% for product in cart.products.all %}
+        <tr>
+            <td scope="row">{{ forloop.counter }}</td>
+            <td>{{ product.title }}</td>
+            <td>
+                {% include 'update_cart.html' with product=product cart=cart in_cart=True%}
+            </td>
+            <td>{{ product.price }} Rs</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3"></td>
+            <td><b>Subtotal : </b> {{cart.subtotal}} Rs</td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td><b>Total : </b> {{cart.total}} Rs</td>
+        </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <p class='lead'>Cart is empty</p>
+    {% endif %} 
+    <p class="text-right" style="margin-top: 5px;">
+        <a href="/new" class="btn btn-primary btn-lg" >Continue shopping</a>
+        <a href="checkout" class="btn btn-success btn-lg" >Checkout</a>
+    </p>  
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Enter username and password for login<h1>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <small>
+    <a href="{% url 'user:register' %}">Register</a> | 
+    <a href="{% url 'user:password_reset' %}">Forgotten your Password?</a>
+  </small>
+  <input type="submit" class="btn btn-outline-success" value="Login">
+</form>
+<br>
+  <p><strong>-- OR --</strong></p>
+  <a href="{% url 'social:begin' 'google-oauth2' %}">
+    <button type="button" name="button"class="btn btn-danger">Login with google+</button>
+  </a>
+  <a href="{% url 'social:begin' 'twitter' %}">
+    <button type="button" name="button"class="btn btn-info">Login with Twitter</button>
+  </a>
+  <a href="{% url 'social:begin' 'facebook' %}">
+    <button type="button" name="button"class="btn btn-primary" onclick="">Login with Facebook</button>
+  </a>
+
+{% endblock %}

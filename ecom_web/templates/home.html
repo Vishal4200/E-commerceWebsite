@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>THIS IS A HOMEPAGE</h1>
+
+<!-- POSTS -->
+<br>
+
+<div class="row">
+	{% for item in post %}
+				<div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+					<!--Collection card-->
+					<div class="card collection-card" style="width: 20rem;">
+						<!--Card image-->
+						<div class="view zoom">
+						<img class="img-fluid" src="{{ item.image1.url }}"
+							alt="Example photo"  width="400" style="max-height: 250;"> 
+						<div class="stripe_dark">
+							<a href="{{ item.slug }}">
+							<p>{{item.title}}<br>Rs-{{item.price}} <i class="fas fa-chevron-right"></i></p>
+							</a>
+						</div>
+						</div>
+						<!--/.Card image-->
+					</div>
+					<!--/.Collection card-->
+				</div>
+					{% empty %}
+					<div class="container-fluid">
+					<h3>No Posts Found having search name "{{request.GET.q}}"</h3>
+					</div>
+	{% endfor %}
+</div>
+<style>
+	.stripe_dark {
+  width: 400;
+  position: absolute;
+  bottom: 0px;
+  background-color:black;
+  opacity: 0.6;
+}
+.stripe_dark a p{
+	font-weight: bold;
+	text-align:start;
+	font-size: large;
+	font-family: 'Times New Roman';
+	color: white;
+}
+</style>
+{% endblock %}

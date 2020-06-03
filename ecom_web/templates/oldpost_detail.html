@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/detail_page.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1 class="text-primary">This is A Detailed page of {{post.title}}</h1>
+<br>
+
+<div class="w3-content w3-display-container">
+  <img class="mySlides" src="{{ post.image1.url }}" style="width:50%;height:100%;margin-left: auto;margin-right: auto;" alt="Image 1">
+  <img class="mySlides" src="{{ post.image2.url }}" style="width:50%;height:100%;margin-left: auto;margin-right: auto;" alt="Image 2">
+  <img class="mySlides" src="{{ post.image3.url }}" style="width:50%;height:100%;margin-left: auto;margin-right: auto;" alt="Image 3">
+  <img class="mySlides" src="{{ post.image4.url }}" style="width:50%;height:100%;margin-left: auto;margin-right: auto;" alt="Image 4">
+  <img class="mySlides" src="{{ post.image5.url }}" style="width:50%;height:100%;margin-left: auto;margin-right: auto;" alt="Image 5">
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+
+<!-- The grid: five columns -->
+<div class="row">
+  <div class="column">
+    <img src="{{ post.image1.url }}" style="width:100%;cursor:pointer" alt="Image 1" onclick="currentDiv(1)">
+  </div>
+  <div class="column">
+    <img src="{{ post.image2.url }}" style="width:100%;cursor:pointer" alt="Image 2" onclick="currentDiv(2)">
+  </div>
+  <div class="column">
+    <img src="{{ post.image3.url }}" style="width:100%;cursor:pointer" alt="Image 3" onclick="currentDiv(3)">
+  </div>
+  <div class="column">
+    <img src="{{ post.image4.url }}" style="width:100%;cursor:pointer" alt="Image 4" onclick="currentDiv(4)">
+  </div>
+  <div class="column">
+    <img src="{{ post.image5.url }}" style="width:100%;cursor:pointer" alt="Image 5" onclick="currentDiv(5)">
+  </div>
+</div>
+
+<div> 
+<h1 class="text-primary">For Rs - {{post.price}} </h1>
+<br> 
+<dl><h3 class="text-primary"><dt>Description </dt><small><dd> - {{post.description}} </dd></small></h3>
+</dl>
+</div> 
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+</script>
+{% endblock %}

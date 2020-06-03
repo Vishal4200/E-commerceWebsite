@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Profile<h1>
+<form action="edit_profile" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <table>
+  {{ user_form.as_table }}
+  {{ profile_form.as_table }}
+  </table>
+  <input type="submit" class="btn btn-outline-success" value="Save Changes">
+</form>
+{% endblock %}
